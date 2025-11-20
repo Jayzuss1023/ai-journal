@@ -8,7 +8,7 @@ export const sanityClient = createClient({
   dataset: process.env.EXPO_PUBLIC_SANITY_DATASET,
   useCdn: false,
   apiVersion: "2024-01-01",
-  token: process.env.EXPO_PIBLIC_SANITY_TOKEN,
+  token: process.env.EXPO_PUBLIC_SANITY_TOKEN,
 });
 
 // Create image URL builder using the official Sanity package

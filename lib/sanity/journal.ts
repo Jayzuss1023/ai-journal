@@ -245,7 +245,7 @@ export const updateJournalEntry = async (
     console.log("Journal entry updated successfully");
     return result;
   } catch (error) {
-    console.error("Errpr updating journal entry: ", error);
+    console.error("Error updating journal entry: ", error);
     throw error;
   }
 };

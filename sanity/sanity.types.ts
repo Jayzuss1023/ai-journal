@@ -235,6 +235,19 @@ export declare const internalGroqTypeReferenceTo: unique symbol
 // Source: ../lib/sanity/dailyPrompts.ts
 // Variable: ACTIVE_DAILY_PROMPTS_QUERY
 // Query: *[  _type == "dailyPrompt"   && isActive == true] | order(weight desc) {  _id,  title,  prompt,  emoji,  category->{    title,    color  },  suggestedMood,  isActive,  weight,  tags,  createdAt}
+export type ALL_CATEGORIES_QUERYResult = Array<{
+  _id: string
+  title: string
+  color: string
+}>
+// Variable: CATEGORY_BY_ID_QUERY
+// Query: *[  _type == "category"   && _id == $categoryId][0]{  _id,  title,  color}
+export type CATEGORY_BY_ID_QUERYResult = {
+  _id: string
+  title: string | null
+  color: string | null
+} | null
+
 export type ACTIVE_DAILY_PROMPTS_QUERYResult = Array<{
   _id: string
   title: string | null
@@ -399,6 +412,9 @@ export type USER_JOURNAL_ENTRIES_WITH_DATE_RANGE_QUERYResult = Array<{
 import '@sanity/client'
 declare module '@sanity/client' {
   interface SanityQueries {
+    '*[\n  _type == "category"\n] | order(title asc) {\n  _id,\n  title,\n  color\n}': ALL_CATEGORIES_QUERYResult
+    '*[\n  _type == "category" \n  && _id == $categoryId\n][0]{\n  _id,\n  title,\n  color\n}': CATEGORY_BY_ID_QUERYResult
+
     '*[\n  _type == "dailyPrompt" \n  && isActive == true\n] | order(weight desc) {\n  _id,\n  title,\n  prompt,\n  emoji,\n  category->{\n    title,\n    color\n  },\n  suggestedMood,\n  isActive,\n  weight,\n  tags,\n  createdAt\n}': ACTIVE_DAILY_PROMPTS_QUERYResult
     '*[\n  _type == "journalEntry" \n  && userId == $userId\n] | order(createdAt desc) {\n  _id,\n  title,\n  content,\n  mood,\n  createdAt,\n  aiGeneratedCategory->{\n    title,\n    color\n  }\n}': USER_JOURNAL_ENTRIES_QUERYResult
     '*[\n  _type == "journalEntry" \n  && _id == $entryId\n][0]{\n  _id,\n  title,\n  content,\n  mood,\n  createdAt,\n  userId,\n  aiGeneratedCategory->{\n    title,\n    color\n  }\n}': JOURNAL_ENTRY_BY_ID_QUERYResult

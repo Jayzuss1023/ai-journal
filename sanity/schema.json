@@ -85,7 +85,7 @@
         },
         "optional": true
       },
-      "suggestMood": {
+      "suggestedMood": {
         "type": "objectAttribute",
         "value": {
           "type": "union",
