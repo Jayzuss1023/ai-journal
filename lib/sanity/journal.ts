@@ -137,7 +137,7 @@ export const createJournalEntry = async (entry: JournalEntryInput) => {
       content: contentBlocks,
       mood: entry.mood,
       userId: entry.userId,
-      cratedAt: new Date().toISOString(),
+      createdAt: new Date().toISOString(),
       ...(categoryId && {
         aiGeneratedCategory: {
           _type: "reference" as const,
